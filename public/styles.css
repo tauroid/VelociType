@@ -1,8 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Lilita+One&display=swap');
-
+* {
+    box-sizing: border-box;
+}
 
 body {
     height: 100vh;
+    background-color: #BBB;
 }
 
 main {
@@ -10,9 +13,12 @@ main {
     flex-direction: column;
     align-items: center;
     margin: 0 auto;
-    width: 500px;
+    width: 650px;
     height: 100%;
     text-align: center;
+    background-color: white;
+    box-shadow: 0 0 20px #000;
+    overflow: clip;
 }
 
 .title-container {
@@ -21,6 +27,7 @@ main {
     width: 100%;
     color: white;
     font-family: 'Lilita One', cursive;
+    box-shadow: 0 0 10px #000;
 }
 
 h1 {
@@ -34,16 +41,28 @@ h1 {
     flex-grow: 1;
     width: 100%;
     font-family: 'Inter', sans-serif;
+    font-size: 23px;
     overflow-y: scroll;
+    padding: 0 30px;
+    line-height: 1.5;
 }
 
 .input-text-container {
     flex-grow: 0;
-    padding: 14px;
-    border-top: 1px solid black;
+    padding: 25px;
+    box-shadow: 0 0 10px #000;
     width: 100%;
+    background-color: #F06142;
+/*    background-color: #F1FB98; */
 }
 
 .input-text-container input {
     margin: 0 auto;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 30px;
+    box-shadow:inset 0 0 10px #000;
+    border: none;
 }
