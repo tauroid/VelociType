@@ -11,9 +11,23 @@ const characterReplacements = {
 }
 
 window.addEventListener('keydown', (event) => {
+  
+  let key = event.key
+
+  if(key==='Tab' || key==='Shift') {return}
+
   event.preventDefault()
 
-  let key = event.key
+  if(key==='Escape') {
+    h1.focus()
+    return
+  }
+
+  if(key==='Backspace') {
+    inputText.value = inputText.value.slice(0, -1)
+    console.log(inputText.value)
+    return
+  }
 
   if (key === ' ') {
     inputText.value = ''
