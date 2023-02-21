@@ -80,12 +80,12 @@ h1 {
 
 .correct {
     font-weight: bold;
-    color: #63BF75;
+    color: #049120;
 }
 
 .incorrect {
     font-weight: bold;
-    color: #FB8171;
+    color: #E13B25;
 }
 
 .current-word {
