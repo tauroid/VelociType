@@ -4,6 +4,37 @@ const spanArray = []
 
 const h1 = document.querySelector('h1')
 
+const inputText = document.querySelector('#input-text')
+
+const characterReplacements = {
+  'é': 'e',
+}
+
+window.addEventListener('keydown', (event) => {
+  event.preventDefault()
+
+  let key = event.key
+
+  if (key === ' ') {
+    inputText.value = ''
+    return
+  }
+
+  if (key.length > 1) { return }
+
+  if (key in characterReplacements) {
+    key = characterReplacements[key]
+  }
+
+  key = key.toLowerCase()
+
+  if (!/^[a-z0-9']$/.test(key)) { return }
+
+  inputText.value += key
+
+  console.log(inputText.value)
+})
+
 function populateSourceText(data) {
   sourceTextContainer.innerHTML = ''
   spanArray.splice(0, spanArray.length)
@@ -41,6 +72,7 @@ fetch('https://flipsum-ipsum.net/api/icw/v1/generate?ipsum=recipe-ipsum-text-gen
   .then((data) => {
     populateSourceText(data)
 
+    /*
     // Temporary code to demo gameplay
 
     for (let i = 0; i < 20; ++i) {
@@ -53,4 +85,5 @@ fetch('https://flipsum-ipsum.net/api/icw/v1/generate?ipsum=recipe-ipsum-text-gen
 
     spanArray[20].classList.add("current-word")
     // spanArray[20].focus()
+    */
   })
