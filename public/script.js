@@ -2,6 +2,8 @@ const sourceTextContainer = document.querySelector('.source-text-container')
 
 const spanArray = []
 
+const comparisonWordsArray = []
+
 const titleContainerDiv = document.querySelector('.title-container')
 
 const punctuationPronunciation = {
@@ -11,7 +13,19 @@ const punctuationPronunciation = {
   '\'': 'Apostrophe'
 }
 
-function populateSourceText(data) {
+const characterReplacements = {
+  '\u00e9': 'e',
+}
+
+function transformCharacter (character) {
+  if (character in characterReplacements) {
+    character = characterReplacements[character]
+  }
+
+  return character
+}
+
+function processFetchedText(data) {
   sourceTextContainer.innerHTML = ''
   spanArray.splice(0, spanArray.length)
 
@@ -19,6 +33,7 @@ function populateSourceText(data) {
     const p = document.createElement('p')
     paragraphOfText.split(" ").forEach((word) => {
       const span = document.createElement('span')
+      span.classList.add('word')
 
       { // this is complicated because we want to tell the
         // screen reader how to pronounce punctuation
@@ -68,6 +83,8 @@ function populateSourceText(data) {
       spanArray.push(span)
       p.appendChild(span)
       p.appendChild(document.createTextNode(" "))
+
+      comparisonWordsArray.push(word.split('').map(transformCharacter).join(''))
     })
     sourceTextContainer.appendChild(p)
   })
@@ -88,23 +105,9 @@ function populateSourceText(data) {
 
 const inputText = document.querySelector('#input-text')
 
-const characterReplacements = {
-  'é': 'e',
-}
 
 
 
-function transformCharacter (character) {
-  if (character in characterReplacements) {
-    character = characterReplacements[key]
-  }
-
-  character = character.toLowerCase()
-
-  if (!/^[a-z0-9']$/.test(character)) { return null }
-
-  return character
-}
 
 
 
@@ -148,23 +151,7 @@ window.addEventListener('keydown', (event) => {
 fetch('https://flipsum-ipsum.net/api/icw/v1/generate?ipsum=recipe-ipsum-text-generator&start_with_fixed=0&paragraphs=4')
   .then(response => response.json())
   .then((data) => {
-    populateSourceText(data)
-    data.split(" ")
-      .forEach((thingBetweenSpaces) => {
-        
-        thingBetweenSpaces.filter()})
-
-    /*
-    // Temporary code to demo gameplay
-
-    for (let i = 0; i < 20; ++i) {
-      if (Math.random() * 2 < 1.5) {
-        spanArray[i].classList.add("correct")
-      } else {
-        spanArray[i].classList.add("incorrect")
-      }
-    }
-
-    spanArray[20].classList.add("current-word")
-    */
+    processFetchedText(data)
+    console.log(comparisonWordsArray)
   })
+
