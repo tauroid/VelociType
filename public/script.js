@@ -2,16 +2,66 @@ const sourceTextContainer = document.querySelector('.source-text-container')
 
 const spanArray = []
 
+const titleContainerDiv = document.querySelector('.title-container')
+
+const punctuationPronunciation = {
+  '.': 'Full stop',
+  ',': 'Comma',
+  '-': 'Hyphen',
+  '\'': 'Apostrophe'
+}
+
 function populateSourceText(data) {
   sourceTextContainer.innerHTML = ''
   spanArray.splice(0, spanArray.length)
 
-  data.forEach((text) => {
+  // puts the fetched text in the source text container div
+  data.forEach((paragraphOfText) => {
     const p = document.createElement('p')
-    text.split(" ").forEach((word) => {
+    paragraphOfText.split(" ").forEach((word) => {
       const span = document.createElement('span')
-      span.innerText = word
+
+      { // this is complicated because we want to tell the
+        // screen reader how to pronounce punctuation
+        const wordCharacters = word.split('')
+
+        let restOfWordCharacters = wordCharacters
+
+        let startOfWordSection = 0
+        let nextPunctuationIndex = restOfWordCharacters.findIndex(
+          (character) => character in punctuationPronunciation)
+
+        while (nextPunctuationIndex !== -1) {
+          let firstPartOfWord = restOfWordCharacters.slice(
+            startOfWordSection, nextPunctuationIndex+1
+          ).join('')
+
+          span.appendChild(document.createTextNode(firstPartOfWord))
+
+          const punctuation = firstPartOfWord[firstPartOfWord.length-1]
+          const pronunciation = punctuationPronunciation[punctuation]
+
+          const pronunciationSpan = document.createElement('span')
+          pronunciationSpan.classList.add('sr-only')
+          pronunciationSpan.innerText = ' ' + pronunciation
+
+          span.appendChild(pronunciationSpan)
+
+          startOfWordSection = nextPunctuationIndex+1
+
+          restOfWordCharacters = restOfWordCharacters.slice(
+            startOfWordSection, restOfWordCharacters.length)
+
+          nextPunctuationIndex = restOfWordCharacters.findIndex(
+            (character) => character in punctuationPronunciation)
+        }
+
+        let restOfWord = restOfWordCharacters.join('')
+        span.appendChild(document.createTextNode(restOfWord))
+      }
+
       span.tabIndex = "4"
+
       spanArray.push(span)
       p.appendChild(span)
       p.appendChild(document.createTextNode(" "))
@@ -20,7 +70,6 @@ function populateSourceText(data) {
   })
 
   // puts the first word in the title for screen reader
-
   let firstWord = document.querySelector('#first-word')
   if (firstWord !== null) {
     firstWord.remove()
@@ -29,12 +78,10 @@ function populateSourceText(data) {
   firstWord.id = 'first-word'
   firstWord.classList.add('sr-only')
   firstWord.innerText = 'The first word is: ' + spanArray[0].innerText
-  h1.appendChild(firstWord)
-  h1.blur()
-  h1.focus()
+  titleContainerDiv.appendChild(firstWord)
+  titleContainerDiv.blur()
+  titleContainerDiv.focus()
 }
-
-const h1 = document.querySelector('h1')
 
 const inputText = document.querySelector('#input-text')
 
@@ -116,6 +163,5 @@ fetch('https://flipsum-ipsum.net/api/icw/v1/generate?ipsum=recipe-ipsum-text-gen
     }
 
     spanArray[20].classList.add("current-word")
-    // spanArray[20].focus()
     */
   })
