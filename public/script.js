@@ -4,6 +4,8 @@ const spanArray = []
 
 const comparisonWordsArray = []
 
+let comparisonWord = null
+
 const titleContainerDiv = document.querySelector('.title-container')
 
 const punctuationPronunciation = {
@@ -103,7 +105,7 @@ function processFetchedText(data) {
   titleContainerDiv.focus()
 }
 
-const inputText = document.querySelector('#input-text')
+const inputTextbox = document.querySelector('#input-textbox')
 
 
 
@@ -127,13 +129,22 @@ window.addEventListener('keydown', (event) => {
   }
 
   if (key === 'Backspace') {
-    inputText.value = inputText.value.slice(0, -1)
-    console.log(inputText.value)
+    inputTextbox.value = inputTextbox.value.slice(0, -1)
+    console.log(inputTextbox.value)
     return
   }
 
   if (key === ' ') {
-    inputText.value = ''
+    if (comparisonWord !== null) {
+      if (comparisonWord === inputTextbox.value) {
+        console.log('correct')
+      } else {
+        console.log('incorrect')
+      }
+
+      comparisonWord = comparisonWordsArray.shift()
+      inputTextbox.value = ''
+    }
     return
   }
 
@@ -143,15 +154,13 @@ window.addEventListener('keydown', (event) => {
 
   if (key === null) { return }
 
-  inputText.value += key
-
-  console.log(inputText.value)
+  inputTextbox.value += key
 })
 
 fetch('https://flipsum-ipsum.net/api/icw/v1/generate?ipsum=recipe-ipsum-text-generator&start_with_fixed=0&paragraphs=4')
   .then(response => response.json())
   .then((data) => {
     processFetchedText(data)
-    console.log(comparisonWordsArray)
-  })
 
+    comparisonWord = comparisonWordsArray.shift()
+  })
