@@ -4,6 +4,8 @@ const spanArray = []
 
 const comparisonWordsArray = []
 
+let currentSpan = null
+
 let comparisonWord = null
 
 const titleContainerDiv = document.querySelector('.title-container')
@@ -136,13 +138,21 @@ window.addEventListener('keydown', (event) => {
 
   if (key === ' ') {
     if (comparisonWord !== null) {
-      if (comparisonWord === inputTextbox.value) {
-        console.log('correct')
+      currentSpan.classList.remove("current-word")
+      const correct = comparisonWord === inputTextbox.value
+      if (correct) {
+        currentSpan.classList.add("correct")
       } else {
-        console.log('incorrect')
+        currentSpan.classList.add("incorrect")
       }
-
+      currentSpan = spanArray.shift()
       comparisonWord = comparisonWordsArray.shift()
+      currentSpan.classList.add("current-word")
+      srCorrectOrIncorrect = document.createElement('span')
+      srCorrectOrIncorrect.classList.add("sr-only")
+      srCorrectOrIncorrect.innerText = correct ? "correct , " : "incorrect , "
+      currentSpan.insertBefore(srCorrectOrIncorrect, currentSpan.firstChild)
+      currentSpan.focus()
       inputTextbox.value = ''
     }
     return
@@ -163,4 +173,8 @@ fetch('https://flipsum-ipsum.net/api/icw/v1/generate?ipsum=recipe-ipsum-text-gen
     processFetchedText(data)
 
     comparisonWord = comparisonWordsArray.shift()
+
+    currentSpan = spanArray.shift()
+
+    currentSpan.classList.add("current-word")
   })
