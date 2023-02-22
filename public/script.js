@@ -2,15 +2,15 @@ const sourceTextContainer = document.querySelector('.source-text-container')
 
 const spanArray = []
 
-const h1 = document.querySelector('h1')
+const titleContainerDiv = document.querySelector('.title-container')
 
 function populateSourceText(data) {
   sourceTextContainer.innerHTML = ''
   spanArray.splice(0, spanArray.length)
   
-  data.forEach((text) => {
+  data.forEach((paragraphOfText) => {
     const p = document.createElement('p')
-    text.split(" ").forEach((word) => {
+    paragraphOfText.split(" ").forEach((word) => {
       const span = document.createElement('span')
       span.innerText = word
       span.tabIndex = "4"
@@ -31,9 +31,9 @@ function populateSourceText(data) {
   firstWord.id = 'first-word'
   firstWord.classList.add('sr-only')
   firstWord.innerText = 'The first word is: ' + spanArray[0].innerText
-  h1.appendChild(firstWord)
-  h1.blur()
-  h1.focus()
+  titleContainerDiv.appendChild(firstWord)
+  titleContainerDiv.blur()
+  titleContainerDiv.focus()
 }
 
 fetch('https://flipsum-ipsum.net/api/icw/v1/generate?ipsum=recipe-ipsum-text-generator&start_with_fixed=0&paragraphs=4')
@@ -52,5 +52,4 @@ fetch('https://flipsum-ipsum.net/api/icw/v1/generate?ipsum=recipe-ipsum-text-gen
     }
 
     spanArray[20].classList.add("current-word")
-    // spanArray[20].focus()
   })
