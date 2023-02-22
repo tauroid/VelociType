@@ -2,79 +2,10 @@ const sourceTextContainer = document.querySelector('.source-text-container')
 
 const spanArray = []
 
-const h1 = document.querySelector('h1')
-
-const inputText = document.querySelector('#input-text')
-
-const characterReplacements = {
-  'é': 'e',
-}
-
-
-
-function transformCharacter () {
-  let character
-
-
-  if (character in characterReplacements) {
-    character = characterReplacements[key]
-  }
-
-  character = character.toLowerCase()
-
-  if (!/^[a-z0-9']$/.test(character)) { return }
-
-  return character
-
-}
-
-
-
-
-
-window.addEventListener('keydown', (event) => {
-  
-  let key = event.key
-
-  if(key==='Tab' || key==='Shift') {return}
-
-  event.preventDefault()
-
-  if(key==='Escape') {
-    h1.focus()
-    return
-  }
-
-  if(key==='Backspace') {
-    inputText.value = inputText.value.slice(0, -1)
-    console.log(inputText.value)
-    return
-  }
-
-  if (key === ' ') {
-    inputText.value = ''
-    return
-  }
-
-  if (key.length > 1) { return }
-
-  if (key in characterReplacements) {
-    key = characterReplacements[key]
-  }
-
-  key = key.toLowerCase()
-
-  if (!/^[a-z0-9']$/.test(key)) { return }
-
-  inputText.value += key
-
-  console.log(inputText.value)
-})
-
 function populateSourceText(data) {
   sourceTextContainer.innerHTML = ''
   spanArray.splice(0, spanArray.length)
-  
+
   data.forEach((text) => {
     const p = document.createElement('p')
     text.split(" ").forEach((word) => {
@@ -103,7 +34,66 @@ function populateSourceText(data) {
   h1.focus()
 }
 
+const h1 = document.querySelector('h1')
 
+const inputText = document.querySelector('#input-text')
+
+const characterReplacements = {
+  'é': 'e',
+}
+
+
+
+function transformCharacter (character) {
+  if (character in characterReplacements) {
+    character = characterReplacements[key]
+  }
+
+  character = character.toLowerCase()
+
+  if (!/^[a-z0-9']$/.test(character)) { return null }
+
+  return character
+}
+
+
+
+
+
+window.addEventListener('keydown', (event) => {
+  
+  let key = event.key
+
+  if (key === 'Tab' || key === 'Shift') { return }
+
+  event.preventDefault()
+
+  if (key === 'Escape') {
+    h1.focus()
+    return
+  }
+
+  if (key === 'Backspace') {
+    inputText.value = inputText.value.slice(0, -1)
+    console.log(inputText.value)
+    return
+  }
+
+  if (key === ' ') {
+    inputText.value = ''
+    return
+  }
+
+  if (key.length > 1) { return }
+
+  key = transformCharacter(key)
+
+  if (key === null) { return }
+
+  inputText.value += key
+
+  console.log(inputText.value)
+})
 
 fetch('https://flipsum-ipsum.net/api/icw/v1/generate?ipsum=recipe-ipsum-text-generator&start_with_fixed=0&paragraphs=4')
   .then(response => response.json())
