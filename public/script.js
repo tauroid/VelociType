@@ -10,6 +10,28 @@ const characterReplacements = {
   'é': 'e',
 }
 
+
+
+function transformCharacter () {
+  let character
+
+
+  if (character in characterReplacements) {
+    character = characterReplacements[key]
+  }
+
+  character = character.toLowerCase()
+
+  if (!/^[a-z0-9']$/.test(character)) { return }
+
+  return character
+
+}
+
+
+
+
+
 window.addEventListener('keydown', (event) => {
   
   let key = event.key
@@ -81,10 +103,16 @@ function populateSourceText(data) {
   h1.focus()
 }
 
+
+
 fetch('https://flipsum-ipsum.net/api/icw/v1/generate?ipsum=recipe-ipsum-text-generator&start_with_fixed=0&paragraphs=4')
   .then(response => response.json())
   .then((data) => {
     populateSourceText(data)
+    data.split(" ")
+      .forEach((thingBetweenSpaces) => {
+        
+        thingBetweenSpaces.filter()})
 
     /*
     // Temporary code to demo gameplay
