@@ -121,38 +121,78 @@ window.addEventListener('keydown', (event) => {
   
   let key = event.key
 
-  if (key === 'Tab' || key === 'Shift') { return }
+  if (key === 'Tab') {
+    console.log('tab')
+    const correctnessReadout = currentSpan.querySelector('.correctness-readout')
+    if (correctnessReadout !== null) {
+      correctnessReadout.remove()
+    }
+
+    if (currentSpan.classList.contains("current-word")) {
+      console.log('currentSpan is current-word')
+      let srCurrentWord = currentSpan.querySelector(".sr-current-word")
+      if (srCurrentWord === null) {
+        srCurrentWord = document.createElement('span')
+        srCurrentWord.classList.add("sr-current-word")
+        srCurrentWord.classList.add("sr-only")
+        srCurrentWord.innerText = "Current word: "
+        currentSpan.insertBefore(srCurrentWord, currentSpan.firstChild)
+      }
+    }
+    return
+  }
+
+  if (key === 'Shift' || key === 'Control' || key === 'Alt') {
+    return
+  }
 
   event.preventDefault()
 
   if (key === 'Escape') {
-    h1.focus()
+    titleContainerDiv.focus()
     return
   }
 
   if (key === 'Backspace') {
     inputTextbox.value = inputTextbox.value.slice(0, -1)
-    console.log(inputTextbox.value)
     return
   }
 
   if (key === ' ') {
     if (comparisonWord !== null) {
       currentSpan.classList.remove("current-word")
+
       const correct = comparisonWord === inputTextbox.value
       if (correct) {
         currentSpan.classList.add("correct")
       } else {
         currentSpan.classList.add("incorrect")
       }
+
+      // remove screenreader gubbins
+      const correctnessReadout = currentSpan.querySelector('.correctness-readout')
+      if (correctnessReadout !== null) {
+        correctnessReadout.remove()
+      }
+      const srCurrentWord = currentSpan.querySelector('.sr-current-word')
+      if (srCurrentWord !== null) {
+        srCurrentWord.remove()
+      }
+
       currentSpan = spanArray.shift()
       comparisonWord = comparisonWordsArray.shift()
+
       currentSpan.classList.add("current-word")
+
+      // say what happened with the last word
       srCorrectOrIncorrect = document.createElement('span')
       srCorrectOrIncorrect.classList.add("sr-only")
+      srCorrectOrIncorrect.classList.add("correctness-readout")
       srCorrectOrIncorrect.innerText = correct ? "correct , " : "incorrect , "
       currentSpan.insertBefore(srCorrectOrIncorrect, currentSpan.firstChild)
+
       currentSpan.focus()
+
       inputTextbox.value = ''
     }
     return
