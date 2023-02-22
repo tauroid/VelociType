@@ -15,7 +15,6 @@ function populateSourceText(data) {
   sourceTextContainer.innerHTML = ''
   spanArray.splice(0, spanArray.length)
 
-  // puts the fetched text in the source text container div
   data.forEach((paragraphOfText) => {
     const p = document.createElement('p')
     paragraphOfText.split(" ").forEach((word) => {
@@ -32,20 +31,13 @@ function populateSourceText(data) {
           (character) => character in punctuationPronunciation)
 
         while (nextPunctuationIndex !== -1) {
-          let firstPartOfWord = restOfWordCharacters.slice(
-            startOfWordSection, nextPunctuationIndex+1
-          ).join('')
-
-          span.appendChild(document.createTextNode(firstPartOfWord))
-
-          const punctuation = firstPartOfWord[firstPartOfWord.length-1]
+          const punctuation = restOfWordCharacters[nextPunctuationIndex]
           const pronunciation = punctuationPronunciation[punctuation]
 
-          const pronunciationSpan = document.createElement('span')
-          pronunciationSpan.classList.add('sr-only')
-          pronunciationSpan.innerText = ' ' + pronunciation
-
-          span.appendChild(pronunciationSpan)
+          // update the loop variables
+          const firstPartOfWord = restOfWordCharacters.slice(
+            startOfWordSection, nextPunctuationIndex
+          ).join('')
 
           startOfWordSection = nextPunctuationIndex+1
 
@@ -54,6 +46,17 @@ function populateSourceText(data) {
 
           nextPunctuationIndex = restOfWordCharacters.findIndex(
             (character) => character in punctuationPronunciation)
+          // end of updating the loop variables
+
+          span.appendChild(document.createTextNode(firstPartOfWord))
+
+          const pronunciationSpan = document.createElement('span')
+          pronunciationSpan.classList.add('sr-only')
+          pronunciationSpan.innerText = ' ' + pronunciation
+
+          span.appendChild(pronunciationSpan)
+
+          span.appendChild(document.createTextNode(punctuation))
         }
 
         let restOfWord = restOfWordCharacters.join('')
