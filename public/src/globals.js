@@ -6,7 +6,5 @@ const wordSpanArray = []
 // Array of sanitised strings to compare user input to
 const comparisonWordsArray = []
 
-// Span of the current word
 let currentWordSpan = null
-// User input comparison string for the current word
 let comparisonWord = null
