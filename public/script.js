@@ -63,14 +63,4 @@ window.addEventListener('keydown', (event) => {
 
 fetch('https://flipsum-ipsum.net/api/icw/v1/generate?ipsum=recipe-ipsum-text-generator&start_with_fixed=0&paragraphs=4')
   .then(response => response.json())
-  .then((data) => {
-    processFetchedText(data)
-
-    // shift the first word span off the array and into `currentWordSpan`
-    currentWordSpan = wordSpanArray.shift()
-    // put the box around it
-    currentWordSpan.classList.add("current-word")
-
-    // shift the first comparison word off the array and into `comparisonWord`
-    comparisonWord = comparisonWordsArray.shift()
-  })
+  .then(processFetchedText)

@@ -40,33 +40,33 @@ function sayCorrectOrIncorrect(span, correct) {
 }
 
 function handleSpace() {
-    // check the text has even been loaded
-    if (comparisonWord !== null) {
-      const inputTextbox = document.querySelector('#input-textbox')
+  // check the text has even been loaded
+  if (comparisonWord !== null) {
+    const inputTextbox = document.querySelector('#input-textbox')
 
-      currentWordSpan.classList.remove("current-word")
+    currentWordSpan.classList.remove("current-word")
 
-      const correct = comparisonWord === inputTextbox.value
+    const correct = comparisonWord === inputTextbox.value
 
-      inputTextbox.value = ''
+    inputTextbox.value = ''
 
-      if (correct) {
-        currentWordSpan.classList.add("correct")
-      } else {
-        currentWordSpan.classList.add("incorrect")
-      }
-
-      cleanupTemporaryScreenReaderText(currentWordSpan)
-
-      // get the next word
-      currentWordSpan = wordSpanArray.shift()
-      comparisonWord = comparisonWordsArray.shift()
-
-      currentWordSpan.classList.add("current-word")
-
-      // say what happened with the last word
-      sayCorrectOrIncorrect(currentWordSpan, correct)
-
-      currentWordSpan.focus()
+    if (correct) {
+      currentWordSpan.classList.add("correct")
+    } else {
+      currentWordSpan.classList.add("incorrect")
     }
+
+    cleanupTemporaryScreenReaderText(currentWordSpan)
+
+    // get the next word
+    currentWordSpan = wordSpanArray.shift()
+    comparisonWord = comparisonWordsArray.shift()
+
+    currentWordSpan.classList.add("current-word")
+
+    // say what happened with the last word
+    sayCorrectOrIncorrect(currentWordSpan, correct)
+
+    currentWordSpan.focus()
+  }
 }
