@@ -1,27 +1,6 @@
-// ------------ Text sanitisation ------------
-
-// So the user doesn't have to type accents
-const characterReplacements = {
-  '\u00e9': 'e',
-}
-
-function transformCharacter (character) {
-  if (character in characterReplacements) {
-    return characterReplacements[character]
-  }
-
-  return character
-}
 
 // ------------ Processing the fetched text -------------
 
-// The two following arrays are the same size, and any particular
-// word has the same index in both
-//
-// Array of displayed word spans
-const wordSpanArray = []
-// Array of sanitised strings to compare user input to
-const comparisonWordsArray = []
 
 // For the screen reader
 const punctuationPronunciation = {

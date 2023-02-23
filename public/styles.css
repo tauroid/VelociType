@@ -60,6 +60,8 @@ h1 {
     box-shadow: 0 0 10px #000;
     width: 100%;
     background-color: #F06142;
+    display: flex;
+    justify-content: space-between;
 }
 
 .input-text-container input {
