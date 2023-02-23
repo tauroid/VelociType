@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Lilita+One&display=swap');
+* {
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background-color: #BBB;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    width: 650px;
+    height: 100%;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 0 20px #000;
+    overflow: clip;
+}
+
+.title-container {
+    flex-grow: 0;
+    background-color: #F06142;
+    width: 100%;
+    color: white;
+    font-family: 'Lilita One', cursive;
+    box-shadow: 0 0 10px #000;
+}
+
+h1 {
+    font-size: 60px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+.source-text-container {
+    flex-grow: 1;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 23px;
+    overflow-y: scroll;
+    padding: 0 30px;
+    line-height: 1.5;
+}
+
+.input-text-container {
+    flex-grow: 0;
+    padding: 25px;
+    box-shadow: 0 0 10px #000;
+    width: 100%;
+    background-color: #F06142;
+}
+
+.input-text-container input {
+    margin: 0 auto;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: 30px;
+    box-shadow:inset 0 0 6px #000;
+    border: none;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px; 
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+
+.correct {
+    font-weight: bold;
+    color: #049120;
+}
+
+.incorrect {
+    font-weight: bold;
+    color: #E13B25;
+}
+
+.current-word {
+    border-radius: 7px;
+    background-color: #333;
+    padding: 3px 6px;
+    color: white;
+}
