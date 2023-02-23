@@ -5,9 +5,6 @@ const spanArray = []
 const titleContainerDiv = document.querySelector('.title-container')
 
 function populateSourceText(data) {
-  sourceTextContainer.innerHTML = ''
-  spanArray.splice(0, spanArray.length)
-  
   data.forEach((paragraphOfText) => {
     const p = document.createElement('p')
     paragraphOfText.split(" ").forEach((word) => {
@@ -22,11 +19,6 @@ function populateSourceText(data) {
   })
 
   // puts the first word in the title for screen reader
-
-  let firstWord = document.querySelector('#first-word')
-  if (firstWord !== null) {
-    firstWord.remove()
-  }
   firstWord = document.createElement('span')
   firstWord.id = 'first-word'
   firstWord.classList.add('sr-only')
