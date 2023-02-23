@@ -179,11 +179,11 @@ window.addEventListener('keydown', (event) => {
   if (key === ' ') {
     // check the text has even been loaded
     if (comparisonWord !== null) {
-      inputTextbox.value = ''
-
       currentWordSpan.classList.remove("current-word")
 
       const correct = comparisonWord === inputTextbox.value
+
+      inputTextbox.value = ''
 
       if (correct) {
         currentWordSpan.classList.add("correct")
