@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" type="text/css" href="styles.css">
+    <script type="text/javascript" src="src/globals.js" defer></script>
+    <script type="text/javascript" src="src/textSanitisation.js" defer></script>
+    <script type="text/javascript" src="src/punctuationIterator.js" defer></script>
+    <script type="text/javascript" src="src/wordSpanContents.js" defer></script>
+    <script type="text/javascript" src="src/fetchedTextProcessing.js" defer></script>
+    <script type="text/javascript" src="src/eventHandling.js" defer></script>
     <script type="text/javascript" src="script.js" defer></script>
     <title>VelociType</title>
 </head>
@@ -20,7 +26,9 @@
                 This game takes control of the document focus 
                 to communicate the progress of the player. To navigate
                 focus back to the title, press escape. Otherwise, focus
-                will be placed on the current word to be typed. 
+                will be placed on the current word to be typed. All
+                numbers are in numerals, and all full stops are followed
+                by a capital letter. Punctuation is read out literally.
             </span>
         </div>
 
@@ -28,8 +36,8 @@
         </div>
 
         <div class="input-text-container">
-            <label class="sr-only" for="input-text">typing box</label>
-            <input type="text" id="input-text" name="input-text" tabindex="2">
+            <label class="sr-only" for="input-textbox">typing box</label>
+            <input type="text" id="input-textbox" name="input-textbox" tabindex="2">
         </div>
     </main>
 </body>
