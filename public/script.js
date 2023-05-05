@@ -1,47 +1,44 @@
-const sourceTextContainer = document.querySelector('.source-text-container')
+window.addEventListener('keydown', (event) => {
+  let key = event.key
 
-const spanArray = []
+  if (key === 'Tab') {
+    handleTab()
+    return
+  }
 
-const titleContainerDiv = document.querySelector('.title-container')
+  if (key === 'Shift' || key === 'Control' || key === 'Alt') { return }
 
-function populateSourceText(data) {
-  data.forEach((paragraphOfText) => {
-    const p = document.createElement('p')
-    paragraphOfText.split(" ").forEach((word) => {
-      const span = document.createElement('span')
-      span.innerText = word
-      span.tabIndex = "4"
-      spanArray.push(span)
-      p.appendChild(span)
-      p.appendChild(document.createTextNode(" "))
-    })
-    sourceTextContainer.appendChild(p)
-  })
+  // above here, keys we want to let through to the page
+  event.preventDefault()
+  // below here, keys we want to block and handle ourselves
 
-  // puts the first word in the title for screen reader
-  firstWord = document.createElement('span')
-  firstWord.id = 'first-word'
-  firstWord.classList.add('sr-only')
-  firstWord.innerText = 'The first word is: ' + spanArray[0].innerText
-  titleContainerDiv.appendChild(firstWord)
-  titleContainerDiv.blur()
-  titleContainerDiv.focus()
-}
+  if (key === 'Escape') {
+    // As described in the HTML
+    document.querySelector('.title-container').focus()
+    return
+  }
+
+  const inputTextbox = document.querySelector('#input-textbox')
+
+  if (key === 'Backspace') {
+    inputTextbox.value = inputTextbox.value.slice(0, -1)
+    return
+  }
+
+  if (key === ' ') {
+    handleSpace()
+    return
+  }
+
+  // If it's longer than one character we're pretty sure it
+  // shouldn't go in the text box
+  if (key.length > 1) { return }
+
+  // by now, `key` is considered to be textual input
+  key = transformCharacter(key)
+  inputTextbox.value += key
+})
 
 fetch('https://flipsum-ipsum.net/api/icw/v1/generate?ipsum=recipe-ipsum-text-generator&start_with_fixed=0&paragraphs=4')
   .then(response => response.json())
-  .then((data) => {
-    populateSourceText(data)
-
-    // Temporary code to demo gameplay
-
-    for (let i = 0; i < 20; ++i) {
-      if (Math.random() * 2 < 1.5) {
-        spanArray[i].classList.add("correct")
-      } else {
-        spanArray[i].classList.add("incorrect")
-      }
-    }
-
-    spanArray[20].classList.add("current-word")
-  })
+  .then(processFetchedText)
