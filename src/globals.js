@@ -8,3 +8,7 @@ const comparisonWordsArray = []
 
 let currentWordSpan = null
 let comparisonWord = null
+
+// score counter
+let numberOfCorrectWords = null
+let numberOfInCorrectWords = null
