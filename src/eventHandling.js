@@ -95,12 +95,16 @@ function startAndStopTimer() {
       totalWordsDisplay.innerHTML = totalWordsTyped + '.'
       totalCorrectWordsDisplay.innerHTML = totalCorrectWords + '.'
       totalIncorrectWordsDisplay.innerHTML = totalIncorrectWords + '.'
-      let accuracy = Math.round(totalCorrectWords / (totalWordsTyped) * 100)
-      accuracyDisplay.innerHTML = accuracy + '%'
+      if(totalWordsTyped == 0 ) {
+        accuracyDisplay.innerHTML = 'N.A.' 
+      } else {
+        let accuracy = Math.round(totalCorrectWords / (totalWordsTyped) * 100)
+        accuracyDisplay.innerHTML = accuracy + '%'
+      }
       scrollPixels = 0
       resultsContainer.focus()
       gameOver = true
-    }, 60000,)
+    }, 6,)
 
   }
 }
