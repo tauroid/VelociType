@@ -100,7 +100,7 @@ function startAndStopTimer() {
       scrollPixels = 0
       resultsContainer.focus()
       gameOver = true
-    }, 6000,)
-    
+    }, 60000,)
+
   }
 }
