@@ -10,3 +10,7 @@ const comparisonWordsArray = []
 let currentWordSpan = null
 // User input comparison string for the current word
 let comparisonWord = null
+
+// to keep track of score
+let totalCorrectWords = null
+let totalInCorrectWords = null
