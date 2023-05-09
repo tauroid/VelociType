@@ -27,19 +27,21 @@ window.addEventListener('keydown', (event) => {
     return
   }
 
+  // If it's longer than one character we're pretty sure it
+  // shouldn't go in the text box
+  if (key.length > 1) { return }
+
+  // start timer for space or keypress
+  startAndStopTimer()
+
   if (key === ' ') {
     handleSpace()
     return
   }
 
-  // If it's longer than one character we're pretty sure it
-  // shouldn't go in the text box
-  if (key.length > 1) { return }
-
   // by now, `key` is considered to be textual input
   key = transformCharacter(key)
   inputTextbox.value += key
-  startAndStopTimer()
 })
 
 fetch('https://flipsum-ipsum.net/api/icw/v1/generate?ipsum=recipe-ipsum-text-generator&start_with_fixed=0&paragraphs=4')
