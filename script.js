@@ -21,6 +21,8 @@ window.addEventListener('keydown', (event) => {
   const inputTextbox = document.querySelector('#input-textbox')
 
   if (key === 'Backspace') {
+    // need to do this manually as we allow input even when the
+    // text box isn't focussed
     inputTextbox.value = inputTextbox.value.slice(0, -1)
     return
   }

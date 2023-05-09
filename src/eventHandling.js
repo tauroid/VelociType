@@ -52,8 +52,12 @@ function handleSpace() {
 
     if (correct) {
       currentWordSpan.classList.add("correct")
+      totalCorrectWords++
+      console.log(totalCorrectWords)
     } else {
       currentWordSpan.classList.add("incorrect")
+      totalInCorrectWords++
+      console.log(totalInCorrectWords)
     }
 
     cleanupTemporaryScreenReaderText(currentWordSpan)
