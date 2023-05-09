@@ -16,4 +16,4 @@ let totalCorrectWords = null
 let totalInCorrectWords = null
 
 // time variable
-let countDown = null
+let countDown = 60
