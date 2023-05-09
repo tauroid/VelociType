@@ -13,7 +13,9 @@ let comparisonWord = null
 
 // to keep track of score
 let totalCorrectWords = null
-let totalInCorrectWords = null
+let totalIncorrectWords = null
 
-// time variable
-let countDown = 60
+// for timer
+let countdown = 59
+const timer = document.querySelector(".timer-text")
+let countdownStarted = false

@@ -53,11 +53,22 @@ function handleSpace() {
     if (correct) {
       currentWordSpan.classList.add("correct")
       totalCorrectWords++
-      console.log(totalCorrectWords)
     } else {
       currentWordSpan.classList.add("incorrect")
-      totalInCorrectWords++
-      console.log(totalInCorrectWords)
+      totalIncorrectWords++
+    }
+
+    if (!countdownStarted) {
+      countdownStarted = true
+      const countdownForDisplay = setInterval(() => {
+        timer.innerHTML = countdown
+        countdown--
+      }, 1000)
+      const countdownForInput = setTimeout(() => {
+        timer.innerHTML = 0
+        clearInterval(countdownForDisplay)
+        console.log('Your total correct words were: ' + totalCorrectWords + ' and total incorrect were ' + totalIncorrectWords)
+      }, 60000,)
     }
 
     cleanupTemporaryScreenReaderText(currentWordSpan)
