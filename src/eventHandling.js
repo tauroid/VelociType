@@ -40,7 +40,7 @@ function sayCorrectOrIncorrect(span, correct) {
 }
 
 function handleSpace() {
-  // check the text has even been loaded
+  // checks the text has been loaded, and the game has not finished
   if (comparisonWord !== null && gameOver == false) {
     const inputTextbox = document.querySelector('#input-textbox')
 
@@ -75,17 +75,18 @@ function handleSpace() {
 
       currentWordSpan.focus()
     }
-
   }
 }
 
 function startAndStopTimer() {
   if (!countdownStarted) {
     countdownStarted = true
+
     const countdownForDisplay = setInterval(() => {
       timer.innerHTML = countdown
       countdown--
     }, 1000)
+
     const countdownForInput = setTimeout(() => {
       timer.innerHTML = 0
       clearInterval(countdownForDisplay)
@@ -100,5 +101,6 @@ function startAndStopTimer() {
       resultsContainer.focus()
       gameOver = true
     }, 6000,)
+    
   }
 }
