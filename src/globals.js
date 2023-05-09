@@ -12,8 +12,8 @@ let currentWordSpan = null
 let comparisonWord = null
 
 // to keep track of score
-let totalCorrectWords = null
-let totalIncorrectWords = null
+let totalCorrectWords = 0
+let totalIncorrectWords = 0
 
 // for timer
 let countdown = 59

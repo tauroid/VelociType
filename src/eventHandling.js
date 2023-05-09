@@ -77,11 +77,11 @@ function handleSpace() {
     currentWordSpan = wordSpanArray.shift()
     comparisonWord = comparisonWordsArray.shift()
 
-    currentWordSpan.classList.add("current-word")
+      currentWordSpan.classList.add("current-word")
 
     // say what happened with the last word
     sayCorrectOrIncorrect(currentWordSpan, correct)
 
-    currentWordSpan.focus()
+      currentWordSpan.focus() 
   }
 }
