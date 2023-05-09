@@ -19,3 +19,11 @@ let totalIncorrectWords = 0
 let countdown = 59
 const timer = document.querySelector(".timer-text")
 let countdownStarted = false
+
+// results
+let gameOver = false
+const resultsContainer = document.querySelector("#results-popup")
+const totalWordsDisplay = document.querySelector('#total-words-display')
+const totalCorrectWordsDisplay = document.querySelector('#total-correct-words-display')
+const totalIncorrectWordsDisplay = document.querySelector('#total-incorrect-words-display')
+const accuracyDisplay = document.querySelector('#percentage-of-correct-words')

@@ -41,21 +41,39 @@ function sayCorrectOrIncorrect(span, correct) {
 
 function handleSpace() {
   // check the text has even been loaded
-  if (comparisonWord !== null) {
+  if (comparisonWord !== null && gameOver == false) {
     const inputTextbox = document.querySelector('#input-textbox')
 
-    currentWordSpan.classList.remove("current-word")
-
+    if (currentWordSpan) {
+      currentWordSpan.classList.remove("current-word")
+    }
     const correct = comparisonWord === inputTextbox.value
 
     inputTextbox.value = ''
 
-    if (correct) {
+    if (correct && currentWordSpan) {
       currentWordSpan.classList.add("correct")
       totalCorrectWords++
-    } else {
+    } else if (currentWordSpan) {
       currentWordSpan.classList.add("incorrect")
       totalIncorrectWords++
+    }
+
+    if (currentWordSpan) {
+      cleanupTemporaryScreenReaderText(currentWordSpan)
+
+      // get the next word
+      currentWordSpan = wordSpanArray.shift()
+      comparisonWord = comparisonWordsArray.shift()
+
+    }
+    if (currentWordSpan) {
+      currentWordSpan.classList.add("current-word")
+
+      // say what happened with the last word
+      sayCorrectOrIncorrect(currentWordSpan, correct)
+
+      currentWordSpan.focus()
     }
 
     if (!countdownStarted) {
@@ -67,21 +85,19 @@ function handleSpace() {
       const countdownForInput = setTimeout(() => {
         timer.innerHTML = 0
         clearInterval(countdownForDisplay)
-        console.log('Your total correct words were: ' + totalCorrectWords + ' and total incorrect were ' + totalIncorrectWords)
+        resultsContainer.style.display = 'block'
+        let totalWordsTyped = totalCorrectWords + totalIncorrectWords
+        totalWordsDisplay.innerHTML = totalWordsTyped + '.'
+        totalCorrectWordsDisplay.innerHTML = totalCorrectWords + '.'
+        totalIncorrectWordsDisplay.innerHTML = totalIncorrectWords + '.'
+        let accuracy = Math.round(totalCorrectWords / (totalWordsTyped) * 100)
+        accuracyDisplay.innerHTML = accuracy + '%'
+        if (currentWordSpan) {
+          currentWordSpan.blur()
+        }
+        resultsContainer.focus()
+        gameOver = true
       }, 60000,)
     }
-
-    cleanupTemporaryScreenReaderText(currentWordSpan)
-
-    // get the next word
-    currentWordSpan = wordSpanArray.shift()
-    comparisonWord = comparisonWordsArray.shift()
-
-      currentWordSpan.classList.add("current-word")
-
-    // say what happened with the last word
-    sayCorrectOrIncorrect(currentWordSpan, correct)
-
-      currentWordSpan.focus() 
   }
 }

@@ -138,6 +138,10 @@ h1 {
     color: white;
 }
 
+#results-popup {
+    display: none;
+}
+
 @media screen and (max-width: 650px) {
     main {
         min-width: 350px;

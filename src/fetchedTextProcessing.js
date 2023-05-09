@@ -28,14 +28,14 @@ function processFetchedTextParagraph(paragraphOfText) {
   // .source-text-container
   const p = document.createElement('p')
   paragraphOfText.split(" ").forEach((word) => {
-  const span = createWordSpan(word)
+    const span = createWordSpan(word)
 
-  wordSpanArray.push(span)
-  p.appendChild(span)
-  p.appendChild(document.createTextNode(" "))
+    wordSpanArray.push(span)
+    p.appendChild(span)
+    p.appendChild(document.createTextNode(" "))
 
-  comparisonWordsArray.push(
-    word.split('').map(transformCharacter).join(''))
+    comparisonWordsArray.push(
+      word.split('').map(transformCharacter).join(''))
   })
   document.querySelector('.source-text-container').appendChild(p)
 }
@@ -46,7 +46,11 @@ function processFetchedText(data) {
   sayFirstWordWithScreenReader(wordSpanArray[0].innerText)
 
   // shift the first word span off the array and into `currentWordSpan`
-  currentWordSpan = wordSpanArray.shift()
+  if (wordSpanArray) {
+    currentWordSpan = wordSpanArray.shift()
+  } else {
+    currentWordSpan = null
+  }
   // put the box around it
   currentWordSpan.classList.add("current-word")
 
