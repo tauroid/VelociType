@@ -97,11 +97,8 @@ function startAndStopTimer() {
       let accuracy = Math.round(totalCorrectWords / (totalWordsTyped) * 100)
       accuracyDisplay.innerHTML = accuracy + '%'
       scrollPixels = 0
-      if (currentWordSpan) {
-        currentWordSpan.blur()
-      }
       resultsContainer.focus()
       gameOver = true
-    }, 60000,)
+    }, 6000,)
   }
 }
