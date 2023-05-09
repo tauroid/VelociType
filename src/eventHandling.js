@@ -66,7 +66,7 @@ function handleSpace() {
       currentWordSpan = wordSpanArray.shift()
       comparisonWord = comparisonWordsArray.shift()
     }
-    
+
     if (currentWordSpan) {
       currentWordSpan.classList.add("current-word")
 
@@ -76,29 +76,32 @@ function handleSpace() {
       currentWordSpan.focus()
     }
 
-    if (!countdownStarted) {
-      countdownStarted = true
-      const countdownForDisplay = setInterval(() => {
-        timer.innerHTML = countdown
-        countdown--
-      }, 1000)
-      const countdownForInput = setTimeout(() => {
-        timer.innerHTML = 0
-        clearInterval(countdownForDisplay)
-        resultsContainer.style.display = 'block'
-        let totalWordsTyped = totalCorrectWords + totalIncorrectWords
-        totalWordsDisplay.innerHTML = totalWordsTyped + '.'
-        totalCorrectWordsDisplay.innerHTML = totalCorrectWords + '.'
-        totalIncorrectWordsDisplay.innerHTML = totalIncorrectWords + '.'
-        let accuracy = Math.round(totalCorrectWords / (totalWordsTyped) * 100)
-        accuracyDisplay.innerHTML = accuracy + '%'
-        scrollPixels = 0
-        if (currentWordSpan) {
-          currentWordSpan.blur()
-        }
-        resultsContainer.focus()
-        gameOver = true
-      }, 60000,)
-    }
+  }
+}
+
+function startAndStopTimer() {
+  if (!countdownStarted) {
+    countdownStarted = true
+    const countdownForDisplay = setInterval(() => {
+      timer.innerHTML = countdown
+      countdown--
+    }, 1000)
+    const countdownForInput = setTimeout(() => {
+      timer.innerHTML = 0
+      clearInterval(countdownForDisplay)
+      resultsContainer.style.display = 'block'
+      let totalWordsTyped = totalCorrectWords + totalIncorrectWords
+      totalWordsDisplay.innerHTML = totalWordsTyped + '.'
+      totalCorrectWordsDisplay.innerHTML = totalCorrectWords + '.'
+      totalIncorrectWordsDisplay.innerHTML = totalIncorrectWords + '.'
+      let accuracy = Math.round(totalCorrectWords / (totalWordsTyped) * 100)
+      accuracyDisplay.innerHTML = accuracy + '%'
+      scrollPixels = 0
+      if (currentWordSpan) {
+        currentWordSpan.blur()
+      }
+      resultsContainer.focus()
+      gameOver = true
+    }, 60000,)
   }
 }

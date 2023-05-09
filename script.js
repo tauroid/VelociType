@@ -39,6 +39,7 @@ window.addEventListener('keydown', (event) => {
   // by now, `key` is considered to be textual input
   key = transformCharacter(key)
   inputTextbox.value += key
+  startAndStopTimer()
 })
 
 fetch('https://flipsum-ipsum.net/api/icw/v1/generate?ipsum=recipe-ipsum-text-generator&start_with_fixed=0&paragraphs=4')
