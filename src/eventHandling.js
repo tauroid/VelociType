@@ -65,8 +65,8 @@ function handleSpace() {
       // get the next word
       currentWordSpan = wordSpanArray.shift()
       comparisonWord = comparisonWordsArray.shift()
-
     }
+    
     if (currentWordSpan) {
       currentWordSpan.classList.add("current-word")
 
@@ -92,6 +92,7 @@ function handleSpace() {
         totalIncorrectWordsDisplay.innerHTML = totalIncorrectWords + '.'
         let accuracy = Math.round(totalCorrectWords / (totalWordsTyped) * 100)
         accuracyDisplay.innerHTML = accuracy + '%'
+        scrollPixels = 0
         if (currentWordSpan) {
           currentWordSpan.blur()
         }
