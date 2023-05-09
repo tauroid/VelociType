@@ -1,5 +1,3 @@
-
-
 function createWordSpan(word) {
   const span = document.createElement('span')
   span.classList.add('word')

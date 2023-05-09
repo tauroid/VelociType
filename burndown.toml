@@ -1,0 +1,11 @@
+start-date = "2023-02-20T09:00:00"
+end-date = "2023-02-23T17:00:00"
+board-data = "scrumboard.json"
+accepted-story-points = 6
+accepted-task-points = 26
+stories-list = "Accepted stories"
+done-stories-list = "Done (stories)"
+tasks-list = "Tasks"
+done-tasks-list = "Done (tasks)"
+board-name = "Chickens at Home"
+task-points-name = "spores"
