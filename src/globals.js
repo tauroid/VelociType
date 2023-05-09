@@ -14,3 +14,6 @@ let comparisonWord = null
 // to keep track of score
 let totalCorrectWords = null
 let totalInCorrectWords = null
+
+// time variable
+let countDown = null
