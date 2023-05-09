@@ -40,33 +40,67 @@ function sayCorrectOrIncorrect(span, correct) {
 }
 
 function handleSpace() {
-  // check the text has even been loaded
-  if (comparisonWord !== null) {
+  // checks the text has been loaded, and the game has not finished
+  if (comparisonWord !== null && gameOver == false) {
     const inputTextbox = document.querySelector('#input-textbox')
 
-    currentWordSpan.classList.remove("current-word")
-
+    if (currentWordSpan) {
+      currentWordSpan.classList.remove("current-word")
+    }
     const correct = comparisonWord === inputTextbox.value
 
     inputTextbox.value = ''
 
-    if (correct) {
+    if (correct && currentWordSpan) {
       currentWordSpan.classList.add("correct")
-    } else {
+      totalCorrectWords++
+    } else if (currentWordSpan) {
       currentWordSpan.classList.add("incorrect")
+      totalIncorrectWords++
     }
 
-    cleanupTemporaryScreenReaderText(currentWordSpan)
+    if (currentWordSpan) {
+      cleanupTemporaryScreenReaderText(currentWordSpan)
 
-    // get the next word
-    currentWordSpan = wordSpanArray.shift()
-    comparisonWord = comparisonWordsArray.shift()
+      // get the next word
+      currentWordSpan = wordSpanArray.shift()
+      comparisonWord = comparisonWordsArray.shift()
+    }
 
-    currentWordSpan.classList.add("current-word")
+    if (currentWordSpan) {
+      currentWordSpan.classList.add("current-word")
 
-    // say what happened with the last word
-    sayCorrectOrIncorrect(currentWordSpan, correct)
+      // say what happened with the last word
+      sayCorrectOrIncorrect(currentWordSpan, correct)
 
-    currentWordSpan.focus()
+      currentWordSpan.focus()
+    }
+  }
+}
+
+function startAndStopTimer() {
+  if (!countdownStarted) {
+    countdownStarted = true
+
+    const countdownForDisplay = setInterval(() => {
+      timer.innerHTML = countdown
+      countdown--
+    }, 1000)
+
+    const countdownForInput = setTimeout(() => {
+      timer.innerHTML = 0
+      clearInterval(countdownForDisplay)
+      resultsContainer.style.display = 'block'
+      let totalWordsTyped = totalCorrectWords + totalIncorrectWords
+      totalWordsDisplay.innerHTML = totalWordsTyped + '.'
+      totalCorrectWordsDisplay.innerHTML = totalCorrectWords + '.'
+      totalIncorrectWordsDisplay.innerHTML = totalIncorrectWords + '.'
+      let accuracy = Math.round(totalCorrectWords / (totalWordsTyped) * 100)
+      accuracyDisplay.innerHTML = accuracy + '%'
+      scrollPixels = 0
+      resultsContainer.focus()
+      gameOver = true
+    }, 60000,)
+
   }
 }

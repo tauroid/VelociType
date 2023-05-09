@@ -4,7 +4,8 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script type="text/javascript" src="src/globals.js" defer></script>
     <script type="text/javascript" src="src/textSanitisation.js" defer></script>
@@ -12,35 +13,59 @@
     <script type="text/javascript" src="src/wordSpanContents.js" defer></script>
     <script type="text/javascript" src="src/fetchedTextProcessing.js" defer></script>
     <script type="text/javascript" src="src/eventHandling.js" defer></script>
+    <script type="text/javascript" src="src/timer.js" defer></script>
     <script type="text/javascript" src="script.js" defer></script>
     <title>VelociType</title>
 </head>
 
 <body>
     <main>
-        <div aria-live="assertive" tabindex="1" class="title-container" >
+        <div aria-live="assertive" tabindex="1" class="title-container">
             <h1>
-                VelociType  
-            </h1> 
+                VelociType
+            </h1>
             <span class="sr-only">
-                This game takes control of the document focus 
+                This game takes control of the document focus
                 to communicate the progress of the player. To navigate
                 focus back to the title, press escape. Otherwise, focus
                 will be placed on the current word to be typed. All
                 numbers are in numerals, and all full stops are followed
-                by a capital letter. Punctuation is read out literally.
+                by a capital letter. Punctuation is read out literally. 
+                After you have typed the first letter, you have 60 seconds
+                to accurately type as many words as you can.
             </span>
         </div>
 
         <div class="source-text-container" tabindex="3">
+            <div id="results-popup" tabindex="3">
+                <h2>Time's up!</h2>
+                <p>Total words typed in one minute:
+                    <span id="total-words-display"></span>
+                </p>
+                <p>Number of correct words:
+                    <span id="total-correct-words-display"></span>
+                </p>
+                <p>Number of incorrect words:
+                    <span id="total-incorrect-words-display"></span>
+                </p>
+                <p>Accuracy:
+                    <span id="percentage-of-correct-words"></span>
+                </p>
+            </div>
+        </div>
+        </div>
         </div>
 
-        <div class="input-text-container">
-            <label class="sr-only" for="input-textbox">typing box</label>
-            <input type="text" id="input-textbox" name="input-textbox" tabindex="2">
+        <div class="bottom-section">
+            <div class="timer-container">
+                <span class="timer-text">60</span>
+            </div>
+            <div class="input-text-container">
+                <label class="sr-only" for="input-textbox">typing box</label>
+                <input type="text" id="input-textbox" name="input-textbox" tabindex="2">
+            </div>
         </div>
     </main>
 </body>
 
 </html>
-
