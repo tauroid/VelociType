@@ -36,7 +36,7 @@ function startAndStopTimer() {
 
         resultsContainer.focus()
 
-        gameOver = true
+        timerFinished = true
 
       }, 60000)
     }

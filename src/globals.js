@@ -20,4 +20,4 @@ let countdown = 59
 let countdownStarted = false
 
 // results
-let gameOver = false
+let timerFinished = false

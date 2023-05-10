@@ -41,7 +41,7 @@ function sayCorrectOrIncorrect(span, correct) {
 
 function handleSpace() {
   // checks the text has been loaded, and the game has not finished
-  if (comparisonWord !== null && gameOver == false) {
+  if (comparisonWord !== null && !timerFinished) {
     const inputTextbox = document.querySelector('#input-textbox')
 
     if (currentWordSpan) {
