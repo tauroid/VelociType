@@ -34,7 +34,7 @@ window.addEventListener('keydown', (event) => {
   // start timer for space or keypress
   startAndStopTimer()
 
-  if (key === ' ') {
+  if (key === ' ' || event.code === 'Space' ) {
     handleSpace()
     return
   }
