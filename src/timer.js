@@ -1,16 +1,15 @@
 function startAndStopTimer() {
 
-    if (!countdownStarted) {
-      countdownStarted = true
-  
-      const timer = document.querySelector(".timer-text")
+    countdownStarted = true
 
-      const countdownForDisplay = setInterval(() => {
+    const timer = document.querySelector(".timer-text")
+
+    const countdownForDisplay = setInterval(() => {
         timer.innerHTML = countdown
         countdown--
-      }, 1000)
-  
-      const countdownForInput = setTimeout(() => {
+    }, 1000)
+
+    const countdownForInput = setTimeout(() => {
         timer.innerHTML = 0
         clearInterval(countdownForDisplay)
 
@@ -27,18 +26,16 @@ function startAndStopTimer() {
         totalWordsDisplay.innerHTML = totalWordsTyped + '.'
         totalCorrectWordsDisplay.innerHTML = totalCorrectWords + '.'
         totalIncorrectWordsDisplay.innerHTML = totalIncorrectWords + '.'
-        if(totalWordsTyped == 0 ) {
-          accuracyDisplay.innerHTML = 'N.A.' 
+        if (totalWordsTyped == 0) {
+            accuracyDisplay.innerHTML = 'N.A.'
         } else {
-          let accuracy = Math.round(totalCorrectWords / (totalWordsTyped) * 100)
-          accuracyDisplay.innerHTML = accuracy + '%'
+            let accuracy = Math.round(totalCorrectWords / (totalWordsTyped) * 100)
+            accuracyDisplay.innerHTML = accuracy + '%'
         }
 
         resultsContainer.focus()
 
         timerFinished = true
 
-      }, 60000)
-    }
-  }
-  
+    }, 60000)
+}
