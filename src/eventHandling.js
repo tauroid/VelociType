@@ -44,14 +44,13 @@ function handleSpace() {
   if (comparisonWord !== null && !timerFinished) {
     const inputTextbox = document.querySelector('#input-textbox')
 
-    if (currentWordSpan) {
-      currentWordSpan.classList.remove("current-word")
-    }
+    currentWordSpan.classList.remove("current-word")
+
     const correct = comparisonWord === inputTextbox.value
 
     inputTextbox.value = ''
 
-    if (correct && currentWordSpan) {
+    if (correct) {
       currentWordSpan.classList.add("correct")
       totalCorrectWords++
     } else if (currentWordSpan) {
@@ -59,13 +58,10 @@ function handleSpace() {
       totalIncorrectWords++
     }
 
-    if (currentWordSpan) {
-      cleanupTemporaryScreenReaderText(currentWordSpan)
+    cleanupTemporaryScreenReaderText(currentWordSpan)
 
-      // get the next word
-      currentWordSpan = wordSpanArray.shift() ?? null
-      comparisonWord = comparisonWordsArray.shift() ?? null
-    }
+    currentWordSpan = wordSpanArray.shift() ?? null
+    comparisonWord = comparisonWordsArray.shift() ?? null
 
     if (currentWordSpan) {
       currentWordSpan.classList.add("current-word")
