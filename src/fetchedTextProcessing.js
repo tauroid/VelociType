@@ -23,10 +23,8 @@ function sayFirstWordWithScreenReader(word) {
 }
 
 function processFetchedTextParagraph(paragraphOfText) {
-  // fill up wordSpanArray and comparisonWordsArray, while also
-  // adding the spans, grouped into <p> tags, to the
-  // .source-text-container
   const p = document.createElement('p')
+
   paragraphOfText.split(" ").forEach((word) => {
     const span = createWordSpan(word)
 
@@ -37,6 +35,7 @@ function processFetchedTextParagraph(paragraphOfText) {
     comparisonWordsArray.push(
       word.split('').map(transformCharacter).join(''))
   })
+
   document.querySelector('.source-text-container').appendChild(p)
 }
 
@@ -45,15 +44,9 @@ function processFetchedText(data) {
 
   sayFirstWordWithScreenReader(wordSpanArray[0].innerText)
 
-  // shift the first word span off the array and into `currentWordSpan`
-  if (wordSpanArray) {
-    currentWordSpan = wordSpanArray.shift()
-  } else {
-    currentWordSpan = null
-  }
-  // put the box around it
+  currentWordSpan = wordSpanArray.shift()
+
   currentWordSpan.classList.add("current-word")
 
-  // shift the first comparison word off the array and into `comparisonWord`
   comparisonWord = comparisonWordsArray.shift()
 }
