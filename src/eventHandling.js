@@ -63,8 +63,8 @@ function handleSpace() {
       cleanupTemporaryScreenReaderText(currentWordSpan)
 
       // get the next word
-      currentWordSpan = wordSpanArray.shift()
-      comparisonWord = comparisonWordsArray.shift()
+      currentWordSpan = wordSpanArray.shift() ?? null
+      comparisonWord = comparisonWordsArray.shift() ?? null
     }
 
     if (currentWordSpan) {
@@ -75,36 +75,5 @@ function handleSpace() {
 
       currentWordSpan.focus()
     }
-  }
-}
-
-function startAndStopTimer() {
-  if (!countdownStarted) {
-    countdownStarted = true
-
-    const countdownForDisplay = setInterval(() => {
-      timer.innerHTML = countdown
-      countdown--
-    }, 1000)
-
-    const countdownForInput = setTimeout(() => {
-      timer.innerHTML = 0
-      clearInterval(countdownForDisplay)
-      resultsContainer.style.display = 'block'
-      let totalWordsTyped = totalCorrectWords + totalIncorrectWords
-      totalWordsDisplay.innerHTML = totalWordsTyped + '.'
-      totalCorrectWordsDisplay.innerHTML = totalCorrectWords + '.'
-      totalIncorrectWordsDisplay.innerHTML = totalIncorrectWords + '.'
-      if(totalWordsTyped == 0 ) {
-        accuracyDisplay.innerHTML = 'N.A.' 
-      } else {
-        let accuracy = Math.round(totalCorrectWords / (totalWordsTyped) * 100)
-        accuracyDisplay.innerHTML = accuracy + '%'
-      }
-      scrollPixels = 0
-      resultsContainer.focus()
-      gameOver = true
-    }, 60000,)
-
   }
 }
