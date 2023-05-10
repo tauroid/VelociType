@@ -18,14 +18,13 @@ function startAndStopTimer() {
 
         let totalWordsTyped = totalCorrectWords + totalIncorrectWords
 
-        const totalWordsDisplay = document.querySelector('#total-words-display')
         const totalCorrectWordsDisplay = document.querySelector('#total-correct-words-display')
-        const totalIncorrectWordsDisplay = document.querySelector('#total-incorrect-words-display')
         const accuracyDisplay = document.querySelector('#percentage-of-correct-words')
 
-        totalWordsDisplay.innerHTML = totalWordsTyped + '.'
-        totalCorrectWordsDisplay.innerHTML = totalCorrectWords + '.'
-        totalIncorrectWordsDisplay.innerHTML = totalIncorrectWords + '.'
+        totalCorrectWordsDisplay.innerHTML = totalCorrectWords 
+        // so the sr pauses
+        totalCorrectWordsDisplay.setAttribute('aria-label', totalCorrectWords + '.')
+
         if (totalWordsTyped == 0) {
             accuracyDisplay.innerHTML = 'N.A.'
         } else {

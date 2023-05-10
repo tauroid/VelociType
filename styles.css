@@ -75,7 +75,7 @@ h1 {
     text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: center; 
+    justify-content: center;
 }
 
 .timer-text {
@@ -102,7 +102,7 @@ h1 {
     text-align: center;
     font-family: 'Inter', sans-serif;
     font-size: 30px;
-    box-shadow:inset 0 0 6px #000;
+    box-shadow: inset 0 0 6px #000;
     border: none;
 }
 
@@ -111,11 +111,11 @@ h1 {
     width: 1px;
     height: 1px;
     padding: 0;
-    margin: -1px; 
+    margin: -1px;
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
-  }
+}
 
 .word {
     white-space: nowrap;
@@ -140,15 +140,63 @@ h1 {
 
 #results-popup {
     display: none;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 7px;
+    border: solid  #333 2px;
+    font-family: 'Inter', sans-serif;
+    font-size: 23px;
+    color: #000;
+}
+
+.results-title {
+    font-family: 'Lilita One', cursive;
+    font-size: 30px;
+    color: #333;
+}
+
+.correct-words-container {
+    font-family: 'Lilita One', cursive;
+    flex-grow: 0;
+    width: 75px;
+    height: 75px;
+    border: 6px solid #049120;
+    background-color: #049120;
+    border-radius: 37.5px;
+    margin: auto;
+    vertical-align: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #total-correct-words-display {
-    color: #049120;
+    color: white;
+    font-size: 29px;
 }
 
-#total-incorrect-words-display {
-    color: #E13B25;
+.accuracy-container {
+    background-color: #333;
+    font-family: 'Lilita One', cursive;
+    flex-grow: 0;
+    width: 75px;
+    height: 75px;
+    border-radius: 37.5px;
+    margin: auto;
+    vertical-align: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+
+#percentage-of-correct-words {
+    color: white;
+}
+
 
 @media screen and (max-width: 650px) {
     main {
