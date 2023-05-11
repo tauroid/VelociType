@@ -3,12 +3,11 @@
 const characterReplacements = {
   '\u00e9': 'e',
 }
-  
-function transformCharacter (character) {
+
+function transformCharacter(character) {
   if (character in characterReplacements) {
     return characterReplacements[character]
   }
-  
+
   return character
 }
-  

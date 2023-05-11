@@ -4,14 +4,14 @@ function startAndStopTimer() {
 
     const timer = document.querySelector(".timer-text")
 
-    const countdownForDisplay = setInterval(() => {
+    const timerDecrementsEachSecond = setInterval(() => {
         timer.innerHTML = countdown
         countdown--
     }, 1000)
 
-    const countdownForInput = setTimeout(() => {
+    const gameOverAtSixtySeconds = setTimeout(() => {
         timer.innerHTML = 0
-        clearInterval(countdownForDisplay)
+        clearInterval(timerDecrementsEachSecond)
 
         const resultsContainer = document.querySelector("#results-popup")
         resultsContainer.style.display = 'block'
@@ -21,8 +21,8 @@ function startAndStopTimer() {
         const totalCorrectWordsDisplay = document.querySelector('#total-correct-words-display')
         const accuracyDisplay = document.querySelector('#percentage-of-correct-words')
 
-        totalCorrectWordsDisplay.innerHTML = totalCorrectWords 
-        // so the sr pauses
+        totalCorrectWordsDisplay.innerHTML = totalCorrectWords
+        // full stop in aria-label so the screen reader pauses 
         totalCorrectWordsDisplay.setAttribute('aria-label', totalCorrectWords + '.')
 
         if (totalWordsTyped == 0) {

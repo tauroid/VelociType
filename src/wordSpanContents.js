@@ -10,8 +10,7 @@ function addWordSegment(
   span,
   beforePunctuation,
   pronunciation,
-  punctuation)
-{
+  punctuation) {
   span.appendChild(document.createTextNode(beforePunctuation))
   span.appendChild(createPronunciationSpan(pronunciation))
   span.appendChild(document.createTextNode(punctuation))
