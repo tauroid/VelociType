@@ -21,18 +21,25 @@ window.addEventListener('keydown', (event) => {
   const inputTextbox = document.querySelector('#input-textbox')
 
   if (key === 'Backspace') {
+    // need to do this manually as we allow input even when the
+    // text box isn't focussed
     inputTextbox.value = inputTextbox.value.slice(0, -1)
-    return
-  }
-
-  if (key === ' ') {
-    handleSpace()
     return
   }
 
   // If it's longer than one character we're pretty sure it
   // shouldn't go in the text box
   if (key.length > 1) { return }
+
+  // start timer for space or keypress
+  if (!countdownStarted && !timerFinished) {
+    startAndStopTimer()
+  }
+
+  if (key === ' ') {
+    handleSpace()
+    return
+  }
 
   // by now, `key` is considered to be textual input
   key = transformCharacter(key)

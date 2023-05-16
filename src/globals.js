@@ -6,5 +6,18 @@ const wordSpanArray = []
 // Array of sanitised strings to compare user input to
 const comparisonWordsArray = []
 
+// Span of the current word
 let currentWordSpan = null
+// User input comparison string for the current word
 let comparisonWord = null
+
+// to keep track of score
+let totalCorrectWords = 0
+let totalIncorrectWords = 0
+
+// for timer
+let countdown = 59
+let countdownStarted = false
+
+// results
+let timerFinished = false

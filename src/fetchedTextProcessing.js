@@ -45,6 +45,7 @@ function processFetchedText(data) {
   sayFirstWordWithScreenReader(wordSpanArray[0].innerText)
 
   currentWordSpan = wordSpanArray.shift()
+
   currentWordSpan.classList.add("current-word")
 
   comparisonWord = comparisonWordsArray.shift()

@@ -40,8 +40,8 @@ function sayCorrectOrIncorrect(span, correct) {
 }
 
 function handleSpace() {
-  // check the text has even been loaded
-  if (comparisonWord !== null) {
+  // checks the text has been loaded, and the game has not finished
+  if (comparisonWord !== null && !timerFinished) {
     const inputTextbox = document.querySelector('#input-textbox')
 
     currentWordSpan.classList.remove("current-word")
@@ -52,21 +52,24 @@ function handleSpace() {
 
     if (correct) {
       currentWordSpan.classList.add("correct")
-    } else {
+      totalCorrectWords++
+    } else if (currentWordSpan) {
       currentWordSpan.classList.add("incorrect")
+      totalIncorrectWords++
     }
 
     cleanupTemporaryScreenReaderText(currentWordSpan)
 
-    // get the next word
-    currentWordSpan = wordSpanArray.shift()
-    comparisonWord = comparisonWordsArray.shift()
+    currentWordSpan = wordSpanArray.shift() ?? null
+    comparisonWord = comparisonWordsArray.shift() ?? null
 
-    currentWordSpan.classList.add("current-word")
+    if (currentWordSpan) {
+      currentWordSpan.classList.add("current-word")
 
-    // say what happened with the last word
-    sayCorrectOrIncorrect(currentWordSpan, correct)
+      // say what happened with the last word
+      sayCorrectOrIncorrect(currentWordSpan, correct)
 
-    currentWordSpan.focus()
+      currentWordSpan.focus()
+    }
   }
 }
