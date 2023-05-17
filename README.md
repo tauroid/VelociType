@@ -7,4 +7,4 @@
 - if correct, the word becomes green in the source text; red if incorrect
 - document focus moves to the next word to be typed
 - after a minute you get your scores for total correct words typed and accuracy
-- accessibility: the game is fully playable using the Chrome Screen Reader and tab  
+- accessibility: the game is fully playable using the Chrome Screen Reader  
