@@ -46,6 +46,6 @@ window.addEventListener('keydown', (event) => {
   inputTextbox.value += key
 })
 
-fetch('https://flipsum-ipsum.net/api/icw/v1/generate?ipsum=recipe-ipsum-text-generator&start_with_fixed=0&paragraphs=4')
+fetch('https://tauro.id/flipsum.php')
   .then(response => response.json())
   .then(processFetchedText)
