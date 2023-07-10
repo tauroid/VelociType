@@ -46,6 +46,6 @@ window.addEventListener('keydown', (event) => {
   inputTextbox.value += key
 })
 
-fetch('https://tauro.id/flipsum.php')
+fetch('https://power-plugins.com/api/flipsum/ipsum/coffee-shop?paragraphs=4&start_with_fixed=0')
   .then(response => response.json())
   .then(processFetchedText)
